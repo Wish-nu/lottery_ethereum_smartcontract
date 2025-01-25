@@ -6,8 +6,8 @@ const { Web3 } = require('web3');
 const { interface, bytecode } = require('./compile');
 
 const provider = new HDWalletProvider(
-    'ring apple etc', //enter your mneumonic here
-    'enter sepolia api key link' //sepolia api key
+    'lunch blah blah ', //DO NOT SHARE-enter your mneumonic here
+    'sepolia api key link' //sepolia api key
 );
 
 const web3 = new Web3(provider);
@@ -18,16 +18,15 @@ const deploy = async () => {
     console.log('Attempting to deploy from account', accounts [0]);
     
     const result = await new web3.eth.Contract(JSON.parse(interface)) //abi key
-    .deploy({
-        data: bytecode, arguments: ['Hola! Buenos Dias'] //message 
-        })
-    .send({ gas: '1000000', from: accounts [0]});  // gas and which account
+    .deploy({ data: '0x' + bytecode })
+    .send({ from: accounts [0]});  // gas and which account
 
-    console.log('Contract deployed to', result.options.address);
+    console.log(interface); //ABI
+    console.log('Contract deployed to', result.options.address);    // need to get the address of the deployed contract
     provider.engine.stop()
 
 };
 deploy();
 
 
-//Contract deployed to 0x46B35D73DeE5D4653C17D9d84a55C55209712d4a - contract address
+//Contract deployed to 0x953eaa425CCD1d80B325dE08cc577Ecb48ec5700- contract address
